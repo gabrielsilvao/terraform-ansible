@@ -41,8 +41,8 @@ resource "aws_security_group" "jenkins-sg" {
   }
   ingress {
     description = "allow anyone on port 8080"
-    from_port   = 8080
-    to_port     = 8080
+    from_port   = var.webserver-port
+    to_port     = var.webserver-port
     protocol    = "tcp"
     security_groups = [aws_security_group.lb-sg.id]
   }
@@ -60,6 +60,7 @@ resource "aws_security_group" "jenkins-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
 
 #Create SG for allowing TCP/22 from your IP in us-west-2
 resource "aws_security_group" "jenkins-sg-oregon" {
